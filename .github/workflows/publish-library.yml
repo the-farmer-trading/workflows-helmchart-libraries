@@ -81,4 +81,4 @@ jobs:
       run: helm package ${{ inputs.chartDirectory }}
 
     - name: HELM - Publish
-      run: curl -u ${{ secrets.username }}:${{ secrets.password }} -T ./${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz "https://${{ inputs.registryHost }}/artifactory/${{ inputs.registryRepositoryName }}/${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version }}.tgz"
+      run: curl -u ${{ secrets.username }}:${{ secrets.password }} -T ./${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz "https://${{ inputs.registryHost }}/artifactory/${{ inputs.registryRepositoryName }}/${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz"
