@@ -81,4 +81,4 @@ jobs:
       run: helm registry login -u ${{ secrets.username }} -p ${{ secrets.password }} ${{ inputs.registryHost }}
 
     - name: HELM - Push
-      run: helm push ${{ needs.get-chart-name.outputs.chartName }}.${{ needs.get-chart-version.outputs.chartVersion }}.tgz oci://${{ inputs.registryHost }}/${{ inputs.registryRepositoryName }}
+      run: helm push ${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz oci://${{ inputs.registryHost }}/${{ inputs.registryRepositoryName }}
