@@ -27,7 +27,7 @@ jobs:
       chartVersion: ${{ steps.get-semantic-version.outputs.group1 }}
     steps:
     - name: Check out the repo
-      uses: actions/checkout@a81bbbf8298c0fa03ea29cdc473d45769f953675
+      uses: actions/checkout@releases/v2
         
     - name: SEMVER - Load
       id: read-properties
@@ -48,7 +48,7 @@ jobs:
       chartName: ${{ steps.get-chart-name.outputs.group1 }}
     steps:
     - name: Check out the repo
-      uses: actions/checkout@a81bbbf8298c0fa03ea29cdc473d45769f953675
+      uses: actions/checkout@releases/v2
         
     - name: SEMVER - Load
       id: read-properties
@@ -72,7 +72,7 @@ jobs:
       image: alpine/helm:3.10.2
     steps:
     - name: Check out the repo
-      uses: actions/checkout@a81bbbf8298c0fa03ea29cdc473d45769f953675
+      uses: actions/checkout@releases/v2
 
     - name: HELM - Package
       run: helm package ${{ inputs.chartDirectory }}
