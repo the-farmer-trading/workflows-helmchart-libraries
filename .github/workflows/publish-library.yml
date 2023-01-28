@@ -5,7 +5,7 @@ on:
     inputs:
       registryRepositoryName: 
         type: string  
-        default: "core-helm-local"
+        default: "core-oci-local"
       registryHost:
         type: string
         default: "farmer.jfrog.io"
@@ -80,5 +80,8 @@ jobs:
     - name: HELM - Package
       run: helm package ${{ inputs.chartDirectory }}
 
-    - name: HELM - Publish
-      run: curl -u ${{ secrets.username }}:${{ secrets.password }} -T ./${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz "https://${{ inputs.registryHost }}/artifactory/${{ inputs.registryRepositoryName }}/${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz"
+    - name: HELM - Login
+      run: helm registry login -u ${{ secrets.username }} -p ${{ secrets.password }} ${{ inputs.registryHost }}
+
+    - name: HELM - Push
+      run: helm push ${{ needs.get-chart-name.outputs.chartName }}.${{ needs.get-chart-version.outputs.chartVersion }}.tgz oci://${{ inputs.registryHost }}/${{ inputs.registryRepositoryName }}
