@@ -78,7 +78,7 @@ jobs:
       run: helm package ${{ inputs.chartDirectory }}
 
     - name: HELM - Login
-      run: helm registry login -u ${{ secrets.dockerUsername }} -p ${{ secrets.dockerPassword }} ${{ inputs.dockerRegistry }}
+      run: helm registry login -u "${{ secrets.dockerUsername }}" -p "${{ secrets.dockerPassword }}" "${{ inputs.dockerRegistry }}"
 
     - name: HELM - Push
       run: helm push ${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz oci://${{ inputs.dockerRegistry }}/${{ inputs.registryRepositoryName }}
