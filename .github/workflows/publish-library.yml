@@ -3,20 +3,20 @@ name: publish-library
 on:
   workflow_call:
     inputs:
-      registryRepositoryName: 
-        type: string  
-        default: "core-oci-local"
-      registryHost:
+      registryRepositoryName:
         type: string
-        default: "farmer.jfrog.io"
+        default: "helm-charts"
+      dockerRegistry:
+        type: string
+        default: "europe-west4-docker.pkg.dev"
       chartDirectory:
         type: string
         default: "./chart"  
 
     secrets:
-      username: 
+      dockerUsername: 
         required: true
-      password:
+      dockerPassword:
         required: true        
 
 jobs:
@@ -78,7 +78,7 @@ jobs:
       run: helm package ${{ inputs.chartDirectory }}
 
     - name: HELM - Login
-      run: helm registry login -u ${{ secrets.username }} -p ${{ secrets.password }} ${{ inputs.registryHost }}
+      run: helm registry login -u ${{ secrets.dockerUsername }} -p ${{ secrets.dockerPassword }} ${{ inputs.dockerRegistry }}
 
     - name: HELM - Push
-      run: helm push ${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz oci://${{ inputs.registryHost }}/${{ inputs.registryRepositoryName }}
+      run: helm push ${{ needs.get-chart-name.outputs.chartName }}-${{ needs.get-chart-version.outputs.chartVersion }}.tgz oci://${{ inputs.dockerRegistry }}/${{ inputs.registryRepositoryName }}
