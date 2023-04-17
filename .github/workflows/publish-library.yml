@@ -5,10 +5,10 @@ on:
     inputs:
       registryRepositoryName:
         type: string
-        default: "the-farmer-docker/the-farmer/helm-charts"
+        default: "silvester-306016/the-farmer-docker/the-farmer/helm-charts"
       dockerRegistry:
         type: string
-        default: "europe-west1-docker.pkg.dev/silvester-306016"
+        default: "europe-west1-docker.pkg.dev"
       chartDirectory:
         type: string
         default: "./chart"  
