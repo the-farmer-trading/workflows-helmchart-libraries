@@ -5,7 +5,7 @@ on:
     inputs:
       registryRepositoryName:
         type: string
-        default: "helm-charts"
+        default: "the-farmer/helm-charts"
       dockerRegistry:
         type: string
         default: "europe-west4-docker.pkg.dev"
